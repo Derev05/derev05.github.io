@@ -1,11 +1,10 @@
 ---
 title: 'Walkthrough on Network Enumeration with Nmap: HTB Academy'
-date: 2025-09-02
+date: 2025-09-01
 permalink: /posts/2025/01/htb-walkthrough-1/
 tags:
-  - cool posts
-  - category1
-  - category2
+  - hackthebox
+  - nmap
 ---
 
 Hi, I'm Marc Almeda, and today I'm doing a walkthrough on the HTB Academy module `Network Enumeration with Nmap`. This module touches on how to use Nmap, a free and open source utility for network discovery and security auditing, for host and network enumeration and bypassing security measures such as intrustion detection systems (IDS) and intrusion prevention systems (IPS).
