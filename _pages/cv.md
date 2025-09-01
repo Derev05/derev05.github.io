@@ -11,54 +11,20 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
-
-Work experience
-======
-* Spring 2024: Academic Pages Collaborator
-  * GitHub University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
-
-* Fall 2015: Research Assistant
-  * GitHub University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
-
-* Summer 2015: Research Assistant
-  * GitHub University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
-  
+* BCompSc(Cybersecurity), University of Wollongong, 2025
+* Diploma in Digital and Precision Engineering, Nanyang Polytechnic, 2019
+    
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
-
-Publications
-======
-  <ul>{% for post in site.publications reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+* Programming Languages: Java, HTML, Python, C++, CSS, Bash
+* Libraries & Frameworks: Bootstrap, NumPy, Pandas, Matplotlib, Scikit-Learn, TensorFlow, PyTorch, OpenCV
+* Software: Git, VS Code, Firebase, MongoDB
+* Cybersecurity & Networking: Kali Linux, Wireshark, Burp Suite, Nmap
   
-Talks
+Projects and Achievements
 ======
-  <ul>{% for post in site.talks reversed %}
-    {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
-  
-Teaching
-======
-  <ul>{% for post in site.teaching reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
+* Participated in GovTech's Government Bug Bounty Programme 14 (GBBP14) from late Aug 2025 to early Sept 2025, hosted by YesWeHack
+* Pentested my old school project (a used car sales platform hosted on XAMPP) and detailed my findings in a report
+  * Identified 18 vulnerabilities in total, with 9 classified as critical
+  * Devised 4 privilege escalation strategies by chaining vulnerabilities
+* Created an Android app for real-time facial spoofing detection as part of an academic capstone project
