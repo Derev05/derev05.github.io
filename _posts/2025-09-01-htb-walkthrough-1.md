@@ -7,7 +7,7 @@ tags:
   - nmap
 ---
 
-![Network Enumeration with Nmap](../images/htb-nmap-logo.png "Network Enumeration with Nmap")
+![](../images/htb-nmap-logo.png "Network Enumeration with Nmap")
 
 Hi, I'm Marc Almeda, and today I'm doing a walkthrough on the HTB Academy module `Network Enumeration with Nmap`. This module touches on how to use Nmap, a free and open source utility for network discovery and security auditing, for host and network enumeration and bypassing security measures such as intrustion detection systems (IDS) and intrusion prevention systems (IPS).
 
