@@ -7,6 +7,8 @@ tags:
   - nmap
 ---
 
+![Network Enumeration with Nmap](../files/htb-nmap-logo.png "Network Enumeration with Nmap")
+
 Hi, I'm Marc Almeda, and today I'm doing a walkthrough on the HTB Academy module `Network Enumeration with Nmap`. This module touches on how to use Nmap, a free and open source utility for network discovery and security auditing, for host and network enumeration and bypassing security measures such as intrustion detection systems (IDS) and intrusion prevention systems (IPS).
 
 What is enumeration and why is it important?
@@ -31,6 +33,9 @@ In particular, we are looking to do the following with Nmap in this module:
 * Service enumeration and detection (finding out which services run on a port, and what version of the service is present)
 * OS detection (finding out which operating system runs on the host, which can open up some exploits)
 * Scriptable interaction with the target services using Nmap Scripting Engine (Nmap comes with some scripts that can be used to help find more information on the target)
+
+
+With that explanation, let's get to how I went about answering the questions in the module.
 
 Host Discovery
 ======
