@@ -34,8 +34,22 @@ In particular, we are looking to do the following with Nmap in this module:
 * OS detection (finding out which operating system runs on the host, which can open up some exploits)
 * Scriptable interaction with the target services using Nmap Scripting Engine (Nmap comes with some scripts that can be used to help find more information on the target)
 
-
-With that explanation, let's get to how I went about answering the questions in the module.
+With that, let's dive into the questions asked during the module.
 
 Host Discovery
 ======
+We are given the following nmap scan and asked the following:
+
+**Q: Based on the last result, find out which operating system it belongs to. Submit the name of the operating system as result.** 
+
+<img width="1033" height="167" alt="image" src="https://github.com/user-attachments/assets/ed89438a-f8ca-48c9-b095-e9b3846004a6" />
+
+``Hint: The information that gives us such an indication is Time-To-Live (TTL). There exist a lot of different overviews with different protocols giving us an overview of which systems work specific TTL values.``
+
+The value we want to look at is the the Time-To-Live (TTL) of the packet we received from our scan. In particular, we should look at this snippet here:
+
+``RCVD (0.0152s) ICMP [10.129.2.18 > 10.10.14.2 Echo reply (type=0/code=0) id=13607 seq=0] IP [ttl=128 id=40622 iplen=28 ]``
+
+The packet we received from the target has a TTL value of 128. Doing a Google search on default TTL values for operating systems, we find that Windows' default TTL value is 128. Linux and MAC OS have a default TTL value of 64.
+
+This defines the operating system of our target as **Windows**.
