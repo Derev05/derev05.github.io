@@ -4,5 +4,12 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+Marc Almeda
+====
+Aspiring Cybersecurity Graduate
+
+* LinkedIn: [Marc Almeda](https://www.linkedin.com/in/marc-almeda/)
+* GitHub: [Derev05](https://github.com/Derev05)
+* Discord: paintdrinker
+
+* Certifications: OSCP (ongoing)
