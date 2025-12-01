@@ -46,7 +46,7 @@ This is how I'm planning to set up the network for now:
 
 I've already set most of this up and am left with setting up the AD client VMs to complete the AD setup.
 
-Some future projects I am thinkgng of doing:
+Some future projects I will explore:
 * Implement Wazuh and get it to ingest logs from the domain controller and the client machines, then doing a full compromise of the AD network with Kali and review the logs
 * Do deep dives into the various Active Directory attacks (Kerberoasting, ACL/ACE abuse, DCSync) and the measures to prevent them
 * Host my old school project website (*which is full of holes and is very vulnerable*) and experiment with WAF and honeypot solutions
