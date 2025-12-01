@@ -9,7 +9,7 @@ Introduction
 ===
 A few months ago, my brother said he would be letting go of this old PC below as it could not be upgraded to Windows 11:
 
-![Brother's old PC](_media/promox_setup.jpg)
+![Brother's old PC](/assets/img/homelab-setup/promox_setup.jpg)
 
 I was initially not very interested in taking it, as I was doing pre-course preparation for the OSCP with HackTheBox and job hunting at the same time.
 My current PC could handle the workloads that Hackthebox asked for, so I thought I didn't really need it.
@@ -29,7 +29,7 @@ I also wanted to understand how the tools I was using such as NetExec, Bloodhoun
 
 What I've learnt so far
 ===
-![Proxmox](_media/proxmox_flex.png)
+![Proxmox](/assets/img/homelab-setup/proxmox_flex.png)
 
 After installing Proxmox and getting the server onto the proper subnet, I was greeted with this screen. I searched online for a bit and decided to experiment with implementing a pfSense VM hosting an OpenVPN server so I could create an internal network of AD machines that is segregated from my home network.
 
@@ -40,7 +40,7 @@ The plan
 Before I can start testing and tinkering around with tools, I must build the playground first.
 
 This is how I'm planning to set up the network for now:
-![Homelab Network Diagram](_media/plan.png)
+![Homelab Network Diagram](/assets/img/homelab-setup/plan.png)
 
 I've already set most of this up and am left with setting up the AD client VMs to complete the AD setup.
 
