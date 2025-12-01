@@ -31,7 +31,9 @@ What I've learnt so far
 ===
 ![Proxmox](/assets/img/homelab-setup/proxmox_flex.png)
 
-After installing Proxmox and getting the server onto the proper subnet, I was greeted with this screen. I searched online for a bit and decided to experiment with implementing a pfSense VM hosting an OpenVPN server so I could create an internal network of AD machines that is segregated from my home network.
+After installing Proxmox and getting the server onto the proper subnet, I was greeted with this screen. 
+
+I searched online for a bit and decided to experiment with implementing a pfSense VM hosting an OpenVPN server so I could create an internal network of AD machines that is segregated from my home network.
 
 More on that in the next blog post.
 
