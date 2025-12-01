@@ -1,7 +1,7 @@
 ---
 title: Setting up a homelab
-date: 2025-12-01 23:06:22 +0800
-categories: [homelab, cybersecurity]
+date: 2025-12-01 14:00:22 +0800
+categories: [homelab, cybersecurity,proxmox]
 tags: [homelab, cybersecurity, proxmox]     # TAG names should always be lowercase
 ---
 
