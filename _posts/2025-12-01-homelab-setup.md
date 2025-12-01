@@ -6,7 +6,7 @@ tags: [homelab, cybersecurity, proxmox]     # TAG names should always be lowerca
 ---
 
 Introduction
-===
+----
 A few months ago, my brother said he would be letting go of this old PC below as it could not be upgraded to Windows 11:
 
 ![Brother's old PC](/assets/img/homelab-setup/promox_setup.jpg)
@@ -20,7 +20,7 @@ A homelab stood out as the most suggested project. It would give me a safe space
 So, I decided to take the PC (*with my brother's consent of course*) and turn it into a homelab with a focus on cybersecurity.
 
 Why build a homelab?
-====
+----
 I figured out early on in my job hunt that I was lacking practical experience with the tools that are frequently used in cybersecurity, such as SIEM, EDR and firewalls.
 So I pivoted to learning pentesting, as online resources for pentesting such as HackTheBox and TryHackMe were readily available.
 
@@ -28,7 +28,7 @@ As I learnt more and more about pentesting and in particular, Active Directory a
 I also wanted to understand how the tools I was using such as NetExec, Bloodhound and the Impacket suite worked under the hood as well.
 
 What I've learnt so far
-===
+----
 ![Proxmox](/assets/img/homelab-setup/proxmox_flex.png)
 
 After installing Proxmox and getting the server onto the proper subnet, I was greeted with this screen. 
@@ -38,7 +38,7 @@ I searched online for a bit and decided to experiment with implementing a pfSens
 More on that in the next blog post.
 
 The plan
-====
+----
 Before I can start testing and tinkering around with tools, I must build the playground first.
 
 This is how I'm planning to set up the network for now:
@@ -52,7 +52,7 @@ Some future projects I will explore:
 * Host my old school project website (*which is full of holes and is very vulnerable*) and experiment with WAF and honeypot solutions
 
 Conclusion
-=====
+----
 Over the next few weeks, I'll be documenting how I set up the homelab and the various experiments that I will do.
 In a way, I'll also be building a portfolio for this homelab and seeing where it takes.
 
