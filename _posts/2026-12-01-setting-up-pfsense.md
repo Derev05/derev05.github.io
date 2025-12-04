@@ -23,7 +23,11 @@ My main motivation for setting up pfSense and OpenVPN were the following:
 Configuring the Network: OVS Switches and IntPorts
 ----
 Before I can install pfSense, I will need to add an additional network interface into my Proxmox network config to house my LAN and VLAN subnets.
+
 For now, I'm setting up only one VLAN subnet that will be used for my Active Directory Lab.
+
+For this setup, I'll be following 0xBen's guide and using OVS (Open vSwitch) bridges instead of the default Linux bridges.
+I've tried it with Linux bridges and I feel that OVS bridges make it easier to manage the VLAN setups from the pfSense VM.
 
 
 
