@@ -68,8 +68,7 @@ Installing pfSense
 pfSense has a Community Edition ISO image that you can download here:
 [pfSense download](https://www.pfsense.org/download/)
 
-
-> However, Netgate is requiring users to create an account and provide personal information in order to download the pfSense CE ISO images. If you aren't very keen on doing that, or find it a hassle like I did, you can download it from here instead:
+> Netgate requires users to create an account and provide personal information in order to download the pfSense CE ISO images. If you aren't very keen on doing that, or find it a hassle like I did, you can download it from here instead:
 [pfSense alt download](https://atxfiles.netgate.com/mirror/downloads/)
 {: .prompt-info }
 
