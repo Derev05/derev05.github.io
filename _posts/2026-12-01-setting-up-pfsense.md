@@ -63,7 +63,7 @@ This is the network setup I went with:
 
 ![vmbr1_80](/assets/img/setting-up-pfsense/vmbr1_vlan_80.png)
 
-Installing pfSense
+Creating and Configuring the pfSense VM
 ----
 pfSense has a Community Edition ISO image that you can download here:
 [pfSense download](https://www.pfsense.org/download/)
@@ -73,3 +73,24 @@ pfSense has a Community Edition ISO image that you can download here:
 {: .prompt-info }
 
 After downloading the pfSense CE ISO image, I created the pfSense VM with the following settings:
+
+![VM Setup 1](/assets/img/setting-up-pfsense/vm-setup-1.png)
+
+![VM Setup 2](/assets/img/setting-up-pfsense/vm-setup-2.png)
+
+![VM Setup 3](/assets/img/setting-up-pfsense/vm-setup-3.png)
+
+![VM Setup 4](/assets/img/setting-up-pfsense/vm-setup-4.png)
+
+![VM Setup 5](/assets/img/setting-up-pfsense/vm-setup-5.png)
+
+![VM Setup 6](/assets/img/setting-up-pfsense/vm-setup-6.png)
+
+![VM Setup 7](/assets/img/setting-up-pfsense/vm-setup-7.png)
+
+![VM Final Setup](/assets/img/setting-up-pfsense/vm-final-setup.png)
+
+> Don't start the VM yet.
+{: .prompt-warning }
+
+I added **vmbr1** as a virtual NIC (Network Interface Controller) to the pfSense VM, which will allow me to configure it after installing pfSense.
