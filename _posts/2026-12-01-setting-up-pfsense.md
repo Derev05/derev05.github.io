@@ -99,3 +99,6 @@ I added **vmbr1** as a virtual NIC (Network Interface Controller) to the pfSense
 _Select the pfSense VM, go to the Hardware tab and press "Add Network Device"_
 
 ![Add vmbr1](/assets/img/setting-up-pfsense/add-vmbr1-to-pfsense-vm.png)
+
+> Assign a static IP address to your pfSense VM through your router if you want some consistency and stability.
+{: .prompt-info }
