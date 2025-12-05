@@ -29,6 +29,48 @@ For now, I'm setting up only one VLAN subnet that will be used for my Active Dir
 For this setup, I'll be following 0xBen's guide and using OVS (Open vSwitch) bridges instead of the default Linux bridges.
 I've tried it with Linux bridges and I feel that OVS bridges make it easier to manage the VLAN setups from the pfSense VM.
 
+Before I started, I created a backup of the default network interface setup with the following command:
+
+```
+cp /etc/network/interfaces /etc/network/interfaces.bak
+```
+
+This backup proved essential as I ended up locking myself out of the web UI a few times while learning how to set it up.
+I got back web UI access by doing the following:
+
+```
+cp /etc/network/interfaces.bak /etc/network/interfaces
+ifreload -a
+```
+
+This is the network setup I went with:
+
+![Network Setup](/assets/img/setting-up-pfsense/proxmox_network_setup.png)
+
+**vmbr0**: This is the OVS bridge that will act as the production switch for my home LAN, which uses the only network device(*shown here as OVS Port*) on my server. vmbr0 is set up as a Linux bridge by default, but I converted it into an OVS bridge.
+
+![vmbr0](/assets/img/setting-up-pfsense/vmbr0_ovs_bridge.png)
+
+**vmbr0_mgmt**: This OVS port will serve as the main access to my Proxmox server's web UI and subsequently the pfSense VM's web UI after installation.
+
+![vmbr0_mgmt](/assets/img/setting-up-pfsense/vmbr0_web_mgmt_ovs_switch.png)
+
+**vmbr1**: This OVS bridge will be used as the pfSense internal switch for LAN and VLAN support, which I will use to set up the internal network.
+
+![vmbr1](/assets/img/setting-up-pfsense/vmbr1_ovs_bridge.png)
+
+**vmbr1_80**: This will be used for my Active Directory lab on VLAN 80.
+
+![vmbr1_80](/assets/img/setting-up-pfsense/vmbr1_vlan_80.png)
+
+Installing pfSense
+----
+pfSense has a Community Edition ISO image that you can download here:
+[pfSense download](https://www.pfsense.org/download/)
 
 
+> However, Netgate is requiring users to create an account and provide personal information in order to download the pfSense CE ISO images. If you aren't very keen on doing that, or find it a hassle like I did, you can download it from here instead:
+[pfSense alt download](https://atxfiles.netgate.com/mirror/downloads/)
+{: .prompt-info }
 
+After downloading the pfSense CE ISO image, I created the pfSense VM with the following settings:
