@@ -90,7 +90,12 @@ After downloading the pfSense CE ISO image, I created the pfSense VM with the fo
 
 ![VM Final Setup](/assets/img/setting-up-pfsense/vm-final-setup.png)
 
-> Don't start the VM yet.
+> Confirm the settings here but don't start the VM yet.
 {: .prompt-warning }
 
 I added **vmbr1** as a virtual NIC (Network Interface Controller) to the pfSense VM, which will allow me to configure it after installing pfSense.
+
+![Add NIC](/assets/img/setting-up-pfsense/add-nic-to-pfsense-vm.png)
+_Select the pfSense VM, go to the Hardware tab and press "Add Network Device"_
+
+![Add vmbr1](/assets/img/setting-up-pfsense/add-vmbr1-to-pfsense-vm.png)
