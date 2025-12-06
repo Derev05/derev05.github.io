@@ -1,25 +1,24 @@
 ---
-title: Setting up pfSense and OpenVPN on my homelab
+title: Setting up pfSense in my homelab
 date: 2026-12-01 14:00:22 +0800
 categories: [cybersecurity, homelab, proxmox]
-tags: [cybersecurity, homelab, proxmox, pfsense, openvpn]
+tags: [cybersecurity, homelab, proxmox, pfsense]
 ---
 
 Introduction
 ----
-In this post, I will be going over how I set up my internal network with firewall rules using pfSense and OpenVPN.
+In this post, I will be going over how I set up my internal network with firewall rules using pfSense.
 Configuring both of them took me a few days, which consisted of reading tutorials, documentation and testing.
 
 The main tutorial I have been using is 0xBen's guide on converting a laptop into a cybersecurity lab which you can find here:
 [Installing Proxmox on a Laptop and Building a Cybersecurity Lab](https://benheater.com/proxmox-cybersecurity-lab/)
 
-My main motivation for setting up pfSense and OpenVPN were the following:
+This was why I wanted to set up pfSense:
 * I needed clear network segmentation between my internal network of DVVMs (Damn Vulnerable Virtual Machines) and my home LAN.
 * Hosting DVVMs on the home LAN is a recipe for disaster.
-* I wanted a remote access point to the internal network using OpenVPN. 
 * For now I only have an Active Directory lab, but I need to factor in future plans that will require more VLAN subnets.
-* I thought this would be a good way to get hands-on experience with network segmentation, firewall rules and VPN routing.
-
+* I thought this would be a good way to get hands-on experience with network segmentation and firewall rules.
+  
 Configuring the Network: OVS Switches and IntPorts
 ----
 Before I can install pfSense, I will need to add an additional network interface into my Proxmox network config to house my LAN and VLAN subnets.
@@ -100,5 +99,99 @@ _Select the pfSense VM, go to the Hardware tab and press "Add Network Device"_
 
 ![Add vmbr1](/assets/img/setting-up-pfsense/add-vmbr1-to-pfsense-vm.png)
 
-> Assign a static IP address to your pfSense VM through your router if you want some consistency and stability.
+Installing pfSense
+----
+After configuring the VM settings, I started up the pfSense VM and used these settings for installation:
+
+![pfsense-install-1](/assets/img/setting-up-pfsense/pfsense-install-1.png)
+
+![pfsense-install-2](/assets/img/setting-up-pfsense/pfsense-install-2.png)
+
+![pfsense-install-3](/assets/img/setting-up-pfsense/pfsense-install-3.png)
+
+![pfsense-install-4](/assets/img/setting-up-pfsense/pfsense-install-4.png)
+
+![pfsense-install-5](/assets/img/setting-up-pfsense/pfsense-install-5.png)
+
+![pfsense-install-6](/assets/img/setting-up-pfsense/pfsense-install-6.png)
+
+Then after the installation finished, I chose to reboot the machine:
+
+![pfsense-install-reboot](/assets/img/setting-up-pfsense/pfsense-install-reboot.png)
+
+Assigning and Configuring WAN, LAN and AD VLAN 
+----
+After rebooting, pfSense will ask if VLANs need to be setup first for interface configuration. This is where the network setup with the OVS switches and ports come in handy for setting up VLANs.
+
+![pfsense-interface-setup-1](/assets/img/setting-up-pfsense/pfsense-interface-setup-1.png)
+_I entered Y here to start setting up the VLAN_
+
+![pfsense-interface-setup-2](/assets/img/setting-up-pfsense/pfsense-interface-setup-2.png)
+_vtnet1(vmbr1) will be the parent interface for the Active Directory VLAN on VLAN 80_
+
+![pfsense-interface-setup-3](/assets/img/setting-up-pfsense/pfsense-interface-setup-3.png)
+_vtnet0(vmbr0) will be the WAN interface_
+
+![pfsense-interface-setup-4](/assets/img/setting-up-pfsense/pfsense-interface-setup-4.png)
+_vtnet1(vmbr1) will be the LAN interface_
+
+![pfsense-interface-setup-5](/assets/img/setting-up-pfsense/pfsense-interface-setup-5.png)
+_vtnet1.80(vmbr1_80) is the Active Directory VLAN which will be under vtnet1(vmbr1)_
+
+![pfsense-interface-setup-final](/assets/img/setting-up-pfsense/pfsense-interface-setup-final.png)
+
+> pfSense will assign itself an IP address on the WAN interface (vtnet0/vmbr0) based on vmbr0's MAC address. You can give it a static DHCP reservation so it always takes the same IP address in your router's settings.
 {: .prompt-info }
+
+After this, I went to configure the LAN interface's IP address with the folllowing:
+
+![pfSense LAN IP setup](/assets/img/setting-up-pfsense/pfsense-lan-ip-setup.png)
+_Enter 2 to set interfaces, then enter 2 to configure the LAN._
+
+`Configure IPv4 address LAN interface via DHCP? (y/n)`
+
+Enter `N`
+
+`Enter the new LAN IPv4 address. Press <ENTER> for none:`
+
+I used 172.16.0.1 as the new LAN address, but you can change this to fit your own setup.
+
+`Enter the new LAN IPv4 subnet bit count (1 to 32)`
+
+I used 24 as the subnet bit count, which results in the LAN using the network range of 172.16.0.1/24, but you can change this to fit your own setup.
+
+`For a WAN, enter the new LAN IPv4 upstream gateway address.`
+`For a LAN, press <ENTER> for none:`
+
+This is specific to the WAN(**vtnet0**) and since I'm configuring the LAN, I just press ENTER.
+
+`Configure IPv6 address LAN interface via DHCP6? (y/n)`
+
+Enter `N`.
+
+`Enter the new LAN IPv6 address. Press <ENTER> for none:`
+
+Press ENTER, since we're not configuring IPv6 on this LAN.
+
+`Do you want to enable the DHCP server on LAN? (y/n)`
+
+Enter `Y`
+
+pfSense will then prompt for the start and end addresses of the IPv4 client range.
+
+I put the start address as 172.16.0.10 and the end address as 172.16.0.244, but you can change this to fit your own setup.
+
+`Do you want to revert to HTTP as the webConfigurator protocol? (y/n)`
+
+pfSense's web UI is on HTTPS by default.This can be changed later in the web UI settings later, but for now I entered `N` to remain on HTTPS.
+
+pfSense Web UI First-Time Setup
+----
+To continue configuring the three network interfaces, I needed to access the pfSense VM's web UI.
+
+By default, this web UI is blocked off by a firewall which I disabled by doing the following:
+* Press 8 to open a shell on the pfSense VM
+* Type the following to disable the pfSense firewall
+```
+pfctl -d
+```
