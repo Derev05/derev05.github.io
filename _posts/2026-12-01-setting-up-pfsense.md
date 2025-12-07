@@ -6,7 +6,7 @@ tags: [cybersecurity, homelab, proxmox, pfsense]
 ---
 
 Introduction
-----
+====
 In this post, I will be going over how I set up my internal network with firewall rules using pfSense.
 Configuring both of them took me a few days, which consisted of reading tutorials, documentation and testing.
 
@@ -20,7 +20,7 @@ This was why I wanted to set up pfSense:
 * I thought this would be a good way to get hands-on experience with network segmentation and firewall rules.
   
 Configuring the Network: OVS Switches and IntPorts
-----
+====
 Before I can install pfSense, I will need to add an additional network interface into my Proxmox network config to house my LAN and VLAN subnets.
 
 For now, I'm setting up only one VLAN subnet that will be used for my Active Directory Lab.
@@ -120,7 +120,7 @@ Then after the installation finished, I chose to reboot the machine:
 ![pfsense-install-reboot](/assets/img/setting-up-pfsense/pfsense-install-reboot.png)
 
 Assigning and Configuring WAN, LAN and AD VLAN 
-----
+====
 After rebooting, pfSense will ask if VLANs need to be setup first for interface configuration. This is where the network setup with the OVS switches and ports come in handy for setting up VLANs.
 
 ![pfsense-interface-setup-1](/assets/img/setting-up-pfsense/pfsense-interface-setup-1.png)
@@ -186,7 +186,7 @@ I put the start address as 172.16.0.10 and the end address as 172.16.0.244, but 
 pfSense's web UI is on HTTPS by default.This can be changed later in the web UI settings later, but for now I entered `N` to remain on HTTPS.
 
 pfSense Web UI First-Time Setup
-----
+====
 To continue configuring the network interfaces, I needed to access the pfSense VM's web UI.
 
 By default, this web UI is blocked off by the pfSense VM's firewall which I disabled by doing the following:
@@ -198,3 +198,34 @@ pfctl -d
 
 After logging into the pfSense web UI with the default credentials, pfSense will do a first-time setup:
 
+![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-1.png)
+
+Setting general information for pfSense
+----
+![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-2.png)
+
+NTP Server
+----
+![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-3.png)
+
+WAN Interface Configuration
+----
+![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-4.png)
+_I set a custom DHCP hostname for the DHCP server on my homelab for DHCP configuration_
+
+![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-5.png)
+_Unchecked 'Block RFC1918 Private Networks' since this is an internal setup_
+
+LAN Interface Configuration
+----
+![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-6.png)
+_I set it earlier in the pfSense VM, so this can be safely ignored_
+
+Reloading pfSense and finishing the setup wizard
+----
+> Note that for the first-time setup, the pfSense firewall will be enabled again after pressing Reload. Run the pfctl command again to disable it. 
+{: .prompt-info }
+
+![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-7.png)
+
+![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-finish.png)
