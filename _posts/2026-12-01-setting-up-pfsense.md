@@ -1,12 +1,12 @@
 ---
 title: Setting up pfSense in my homelab
-date: 2026-12-01 14:00:22 +0800
+date: 2025-12-08 20:00:22 +0800
 categories: [cybersecurity, homelab, proxmox]
 tags: [cybersecurity, homelab, proxmox, pfsense]
 ---
 
 Introduction
-====
+----
 In this post, I will be going over how I set up my internal network with firewall rules using pfSense.
 Configuring both of them took me a few days, which consisted of reading tutorials, documentation and testing.
 
@@ -20,7 +20,7 @@ This was why I wanted to set up pfSense:
 * I thought this would be a good way to get hands-on experience with network segmentation and firewall rules.
   
 Configuring the Network: OVS Switches and IntPorts
-====
+----
 Before I can install pfSense, I will need to add an additional network interface into my Proxmox network config to house my LAN and VLAN subnets.
 
 For now, I'm setting up only one VLAN subnet that will be used for my Active Directory Lab.
@@ -120,7 +120,7 @@ Then after the installation finished, I chose to reboot the machine:
 ![pfsense-install-reboot](/assets/img/setting-up-pfsense/pfsense-install-reboot.png)
 
 Assigning and Configuring WAN, LAN and AD VLAN 
-====
+----
 After rebooting, pfSense will ask if VLANs need to be setup first for interface configuration. This is where the network setup with the OVS switches and ports come in handy for setting up VLANs.
 
 ![pfsense-interface-setup-1](/assets/img/setting-up-pfsense/pfsense-interface-setup-1.png)
@@ -186,7 +186,7 @@ I put the start address as 172.16.0.10 and the end address as 172.16.0.244, but 
 pfSense's web UI is on HTTPS by default.This can be changed later in the web UI settings later, but for now I entered `N` to remain on HTTPS.
 
 pfSense Web UI First-Time Setup
-====
+----
 To continue configuring the network interfaces, I needed to access the pfSense VM's web UI.
 
 By default, this web UI is blocked off by the pfSense VM's firewall which I disabled by doing the following:
@@ -229,3 +229,76 @@ Reloading pfSense and finishing the setup wizard
 ![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-7.png)
 
 ![pfsense Web UI Setup](/assets/img/setting-up-pfsense/pfsense-web-ui-setup-finish.png)
+
+Advanced Settings
+----
+After the pfSense setup wizard, I enabled the option to disable hardware checksum offloading. In particular, this is used to avoid some issues that arise with the settings on some netowrk interfaces.
+
+![pfSense Advanced Settings](/assets/img/setting-up-pfsense/pfsense-advanced-settings.png)
+
+After that, pfSense will prompt to reboot the VM.
+
+Renaming the VLAN interface
+----
+The VLAN interface I set up for the Active Directory lab was initially named OPT1. So, I enabled and changed the settings as below:
+
+![pfSense AD LAB Interface](/assets/img/setting-up-pfsense/ad-lab-interface-assign.png)
+
+Setting up Firewall Rules & Aliases
+----
+I needed to configure the firewall settings for my WAN, LAN and AD VLAN interfaces.
+In particular, I wanted to lay the groundwork for setting up the OpenVPN server later for the VLAN subnet.
+
+### Firewall Aliases
+Before setting up any firewall rules, I needed to define a few aliases below, which will help me with the firewall rule setup later.
+
+![pfSense Alias](/assets/img/setting-up-pfsense/pfsense-alias-1.png)
+_This alias defines all the private network & subnets as defined by RFC1918_
+
+![pfSense Alias](/assets/img/setting-up-pfsense/pfsense-alias-2.png)
+_This alias will define the ports used by pfSense for administration_
+
+### WAN Firewall Rules
+I went with this setup for my WAN firewall rules:
+
+![pfSense WAN](/assets/img/setting-up-pfsense/wan-firewall-setup.png)
+
+* **VPN access workaround**: As the name implies, this is a workaround I'm using for my VPN clients (usually VMs hosted on my current PC) to access the OpenVPN server.
+
+![pfSense WAN rules](/assets/img/setting-up-pfsense/wan-firewall-rule-1.png)
+
+* **Allow WAN access to web console**: This rule helps maintain my access to the pfSense VM's web UI from other machines on my home network (WAN).
+
+![pfSense WAN rules](/assets/img/setting-up-pfsense/wan-firewall-rule-2.png)
+
+* **Allow home network to internal LAN**: This will allow devices on my home network to access the internal LAN which will be my VMs on vtnet1(vmbr1).
+
+![pfSense WAN rules](/assets/img/setting-up-pfsense/wan-firewall-rule-3.png)
+
+### LAN Firewall Rules
+I went with the default LAN firewall rules:
+
+![pfSense LAN](/assets/img/setting-up-pfsense/lan-firewall-setup.png)
+
+These are set by default when the LAN interface is created during setup.
+
+### AD_LAB VLAN Firewall Rules
+I went with this setup for my Active Directory Lab firewall rules:
+
+![pfSense VLAN](/assets/img/setting-up-pfsense/ad-lab-firewall-setup.png)
+
+* **Allow traffic to the Internet**: This rule will allow VMs and device on the subnet to send traffic to any non-private IP address.
+
+![pfSense VLAN rules](/assets/img/setting-up-pfsense/ad-lab-firewall-rule-1.png)
+
+* **Allow traffic to default gateway**: This is to prevent traffic to the default gateway (which happens to be a private address) from being blocked by the above rule.
+
+![pfSense VLAN rules](/assets/img/setting-up-pfsense/ad-lab-firewall-rule-2.png)
+
+Conclusion
+----
+With that, I have shown how I set up pfSense for my Proxmox homelab. It was a fun learning experience testing firewall rules and settings.
+I felt that some things could be implemented in a more efficient manner, such as setting up static IP routes for OpenVPN access for the WAN.
+The next post will go into how I set up the OpenVPN server and how I went about testing it.
+
+Marc out.
