@@ -1,6 +1,6 @@
 ---
 title: Setting up pfSense in my homelab
-date: 2025-12-08 20:00:22 +0800
+date: 2025-12-07 20:00:22 +0800
 categories: [cybersecurity, homelab, proxmox]
 tags: [cybersecurity, homelab, proxmox, pfsense]
 ---
