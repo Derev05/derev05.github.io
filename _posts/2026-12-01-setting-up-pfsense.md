@@ -187,11 +187,14 @@ pfSense's web UI is on HTTPS by default.This can be changed later in the web UI 
 
 pfSense Web UI First-Time Setup
 ----
-To continue configuring the three network interfaces, I needed to access the pfSense VM's web UI.
+To continue configuring the network interfaces, I needed to access the pfSense VM's web UI.
 
-By default, this web UI is blocked off by a firewall which I disabled by doing the following:
+By default, this web UI is blocked off by the pfSense VM's firewall which I disabled by doing the following:
 * Press 8 to open a shell on the pfSense VM
 * Type the following to disable the pfSense firewall
 ```
 pfctl -d
 ```
+
+After logging into the pfSense web UI with the default credentials, pfSense will do a first-time setup:
+
