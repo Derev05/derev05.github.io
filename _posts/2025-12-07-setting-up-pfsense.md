@@ -228,7 +228,7 @@ _I set it earlier in the pfSense VM, so this can be safely ignored_
 
 Advanced Settings
 ----
-After the pfSense setup wizard, I enabled the option to disable hardware checksum offloading. In particular, this is used to avoid some issues that arise with the settings on some netowrk interfaces.
+After the pfSense setup wizard, I enabled the option to disable hardware checksum offloading. In particular, this is used to avoid some issues that arise with the settings on some network interfaces.
 
 ![pfSense Advanced Settings](/assets/img/setting-up-pfsense/pfsense-advanced-settings.png)
 
